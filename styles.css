@@ -487,12 +487,6 @@ input:focus {
   margin-bottom: 18px;
   max-width: 48ch;
 }
-.done-quiet {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 17.5px;
-  color: rgba(230, 214, 185, 0.85);
-}
 .done-rule {
   width: 64px;
   height: 1px;
