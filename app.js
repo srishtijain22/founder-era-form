@@ -8,7 +8,7 @@
    confirmation screen but logs the submission to the console
    instead of saving it.                                       */
 
-const SHEET_ENDPOINT = "";
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycby139zYMNfXtbRSes0woXSzElqiqm1nf7b7LsuXG6WoRphZKd3t2AqDz1EqkJmuRqI/exec";
 
 /* ————————————————————————————————————————————————— */
 
