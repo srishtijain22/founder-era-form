@@ -150,6 +150,17 @@ const validators = {
     if (!v.trim()) return 'I’ll need your name.';
     return '';
   },
+  dob(v) {
+    const val = v.trim();
+    if (!val) return 'your date of birth — DD/MM/YYYY.';
+    const m = val.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+    if (!m) return 'DD/MM/YYYY — like 21/08/1994.';
+    const day = +m[1], month = +m[2], year = +m[3];
+    if (day < 1 || day > 31 || month < 1 || month > 12 || year < 1920 || year > 2012) {
+      return 'that date doesn’t look quite right — mind checking it?';
+    }
+    return '';
+  },
   city(v) {
     if (!v.trim()) return 'which city are you in?';
     return '';
@@ -196,7 +207,15 @@ function validateField(name) {
   return !msg;
 }
 
-['name', 'city', 'linkedin', 'email', 'whatsapp'].forEach((name) => {
+// gentle DD/MM/YYYY assist — adds the slashes while typing forward
+form.elements.dob.addEventListener('input', (e) => {
+  if (e.inputType && e.inputType.startsWith('insert')) {
+    const v = form.elements.dob.value;
+    if (/^\d{2}$/.test(v) || /^\d{2}\/\d{2}$/.test(v)) form.elements.dob.value = v + '/';
+  }
+});
+
+['name', 'dob', 'city', 'linkedin', 'email', 'whatsapp'].forEach((name) => {
   form.elements[name].addEventListener('blur', () => {
     if (form.elements[name].value.trim()) validateField(name);
   });
@@ -250,7 +269,7 @@ form.addEventListener('submit', async (e) => {
     return;
   }
 
-  const fields = ['name', 'city', 'journey', 'linkedin', 'email', 'whatsapp'];
+  const fields = ['name', 'dob', 'city', 'journey', 'linkedin', 'email', 'whatsapp'];
   const results = fields.map(validateField);
   if (results.includes(false)) {
     const firstBad = form.querySelector('.field.has-error');
@@ -260,6 +279,7 @@ form.addEventListener('submit', async (e) => {
 
   const payload = {
     name: form.elements.name.value.trim(),
+    dob: form.elements.dob.value.trim(),
     city: form.elements.city.value.trim(),
     journey: form.querySelector('input[name="journey"]:checked').value,
     linkedin: normalizeLinkedIn(form.elements.linkedin.value),

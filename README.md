@@ -30,7 +30,7 @@ A single-page, sunlit signup form for the Founder Era community. Static HTML/CSS
    ```js
    const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycb…/exec";
    ```
-   Commit/redeploy. Done — every submission now appends a row: **Timestamp · Name · City · Journey stage · LinkedIn · Email · WhatsApp · Submissions · Last updated**.
+   Commit/redeploy. Done — every submission now appends a row: **Timestamp · Name · Date of birth · City · Journey stage · LinkedIn · Email · WhatsApp · Submissions · Last updated**.
 
 Until the endpoint is set, the form runs in **preview mode**: the confirmation screen works, but submissions are only logged to the browser console, not saved.
 

@@ -43,7 +43,8 @@
         <h1 class="wordmark" aria-label="in my Founder era">
           <span class="wm-founder">Founder</span><span class="wm-space">&nbsp;</span><span class="wm-era">era</span>
         </h1>
-        <p class="intro">A small, closed space for women founders. Tell me a bit about you, and I&rsquo;ll be in touch about getting you in.</p>
+        <p class="intro">A small, closed space for women founders.</p>
+        <p class="intro intro-sub">Tell me a little about you.<br>I&rsquo;ll take it from there.</p>
       </header>
 
       <form class="card" id="signupForm" novalidate>
@@ -54,6 +55,12 @@
           <p class="field-error" data-error-for="name"></p>
         </div>
 
+        <div class="field">
+          <label for="dob">Date of birth</label>
+          <input type="text" id="dob" name="dob" inputmode="numeric" autocomplete="bday" placeholder="DD/MM/YYYY" required>
+          <p class="field-error" data-error-for="dob"></p>
+        </div>
+
         <div class="field field-city">
           <label for="city">City</label>
           <input type="text" id="city" name="city" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-controls="cityList" placeholder="Start typing your city&hellip;" required>
@@ -62,8 +69,8 @@
         </div>
 
         <fieldset class="field field-journey">
-          <legend>Where are you in your founder journey?</legend>
-          <div class="pills" role="radiogroup" aria-label="Where are you in your founder journey?">
+          <legend>Where are you in your founder era?</legend>
+          <div class="pills" role="radiogroup" aria-label="Where are you in your founder era?">
             <label class="pill">
               <input type="radio" name="journey" value="A founder building now">
               <span class="pill-arrow" aria-hidden="true">&rarr;</span>
@@ -122,7 +129,7 @@
 
       </form>
 
-      <p class="footnote">runs on trust, not transactions.</p>
+      <p class="footnote">High-EQ, low-ego, built on trust, not transactions.</p>
     </section>
 
     <!-- ===================== DONE STATE ===================== -->
