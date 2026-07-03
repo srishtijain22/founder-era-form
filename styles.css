@@ -49,12 +49,12 @@ body {
   font-family: var(--sans);
   color: var(--ink);
   min-height: 100svh;
-  background: var(--cream);
+  background: var(--espresso);
   overflow-x: hidden;
 }
 
 /* ——— Background scenes ————————————————————— */
-/* Cream: low sunlight drifting across the page + graph-paper grid */
+/* Entry: deep espresso with a warm light pool toward the card + graph-paper grid */
 .scene {
   position: fixed;
   inset: 0;
@@ -62,21 +62,20 @@ body {
   pointer-events: none;
   transition: opacity 1.1s ease;
 }
-.scene-cream {
+.scene-entry {
   opacity: 1;
   background:
-    radial-gradient(120% 90% at 85% -10%, rgba(201, 154, 91, 0.30), transparent 55%),
-    radial-gradient(90% 70% at -15% 40%, rgba(233, 220, 195, 0.85), transparent 60%),
-    radial-gradient(100% 80% at 70% 110%, rgba(201, 154, 91, 0.20), transparent 58%),
-    linear-gradient(160deg, #F7F2E7 0%, var(--cream) 42%, #EFE4CD 100%);
+    radial-gradient(85% 70% at 72% 32%, rgba(201, 154, 91, 0.17), transparent 62%),
+    radial-gradient(60% 50% at 8% 4%, rgba(201, 154, 91, 0.1), transparent 60%),
+    linear-gradient(150deg, #483627 0%, var(--espresso) 46%, #281C12 100%);
 }
-.scene-cream::after {
+.scene-entry::after {
   content: '';
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(58, 43, 32, 0.055) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(58, 43, 32, 0.055) 1px, transparent 1px);
+    linear-gradient(rgba(244, 238, 226, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(244, 238, 226, 0.045) 1px, transparent 1px);
   background-size: 88px 88px;
 }
 /* Espresso: warm brown with a golden sheen — never flat */
@@ -96,7 +95,7 @@ body {
     linear-gradient(90deg, rgba(244, 238, 226, 0.05) 1px, transparent 1px);
   background-size: 88px 88px;
 }
-body.is-done .scene-cream { opacity: 0; }
+body.is-done .scene-entry { opacity: 0; }
 body.is-done .scene-espresso { opacity: 1; }
 
 /* Filmic grain — layered above the grid */
@@ -196,7 +195,7 @@ body.is-done .logo-fe { color: #8f9bff; }
   font-weight: 600;
   letter-spacing: 0.42em;
   text-transform: uppercase;
-  color: var(--cobalt);
+  color: #7B86FF;
   margin-bottom: 6px;
   padding-left: 6px;
 }
@@ -221,18 +220,18 @@ body.is-done .logo-fe { color: #8f9bff; }
 /* slow light sheen sweeping across once on load, then settling */
 .wm-founder {
   background-image: linear-gradient(105deg,
-    var(--ink) 0%, var(--ink) 38%,
-    #9a7443 48%, #c99a5b 50%, #9a7443 52%,
-    var(--ink) 62%, var(--ink) 100%);
+    #F4EBDA 0%, #F4EBDA 38%,
+    #E2BE85 48%, #FFE9C4 50%, #E2BE85 52%,
+    #F4EBDA 62%, #F4EBDA 100%);
   animation: wm-sheen 2.9s cubic-bezier(0.33, 0, 0.2, 1) 0.55s forwards;
 }
 .wm-era {
   font-style: italic;
   font-weight: 500;
   background-image: linear-gradient(105deg,
-    var(--cobalt) 0%, var(--cobalt) 38%,
-    #6f7cff 48%, #96a0ff 50%, #6f7cff 52%,
-    var(--cobalt) 62%, var(--cobalt) 100%);
+    #5F6CFF 0%, #5F6CFF 38%,
+    #97A1FF 48%, #C3C9FF 50%, #97A1FF 52%,
+    #5F6CFF 62%, #5F6CFF 100%);
   animation: wm-sheen 2.9s cubic-bezier(0.33, 0, 0.2, 1) 0.75s forwards;
 }
 @keyframes wm-sheen {
@@ -245,18 +244,33 @@ body.is-done .logo-fe { color: #8f9bff; }
   font-size: 17px;
   font-weight: 550;
   line-height: 1.6;
-  color: var(--ink);
+  color: rgba(246, 240, 227, 0.94);
   max-width: 46ch;
 }
 .intro-sub {
   margin-top: 12px;
   font-size: 16px;
   font-weight: 400;
-  color: #5C4F40;
+  color: rgba(230, 219, 200, 0.72);
 }
 
-/* ——— Card stage: entry card + invite slip ——— */
+/* ——— Card stage: tissue underlayer + invite slip + entry card ——— */
 .card-stage { position: relative; }
+
+/* crushed parchment layer — sculptural, matte, framing the card */
+.tissue {
+  position: absolute;
+  inset: -3% -9% -3% -10%;
+  pointer-events: none;
+  filter:
+    drop-shadow(0 46px 80px rgba(0, 0, 0, 0.5))
+    drop-shadow(0 10px 26px rgba(0, 0, 0, 0.35));
+}
+.tissue svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
 
 /* invite-slip insert peeking from behind the card */
 .slip {
@@ -307,11 +321,11 @@ body.is-done .logo-fe { color: #8f9bff; }
   border: 1px solid rgba(139, 117, 90, 0.26);
   border-radius: 24px;
   padding: clamp(28px, 6vw, 44px);
-  /* coated-paper entry card: warm backlight, lit top edge */
+  /* paper invitation on a dark set: deep grounded shadow, lit top edge */
   box-shadow:
-    0 34px 80px -38px rgba(58, 43, 32, 0.42),
-    0 6px 22px -12px rgba(58, 43, 32, 0.16),
-    0 0 90px -18px rgba(201, 154, 91, 0.5),
+    0 40px 90px -40px rgba(0, 0, 0, 0.6),
+    0 10px 28px -14px rgba(0, 0, 0, 0.4),
+    0 0 80px -20px rgba(201, 154, 91, 0.3),
     inset 0 1.5px 0 rgba(255, 255, 255, 0.8),
     inset 0 -18px 30px -24px rgba(139, 117, 90, 0.24);
 }
@@ -559,12 +573,13 @@ input:focus {
 }
 
 .footnote {
-  margin-top: 34px;
+  position: relative;
+  margin-top: 56px;
   text-align: center;
   font-family: var(--serif);
   font-style: italic;
   font-size: 15px;
-  color: var(--muted);
+  color: rgba(230, 214, 185, 0.55);
 }
 
 /* ——— Done / waitlist state ————————————————— */
@@ -712,6 +727,7 @@ input:focus {
     grid-row: 1 / span 2;
     margin-top: 110px;
   }
+  .tissue { inset: -9% -16% -8% -18%; }
   .footnote {
     grid-column: 1;
     grid-row: 2;

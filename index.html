@@ -24,7 +24,7 @@
 <body>
 
   <!-- Background scenes: cream (default) and espresso (post-submit) -->
-  <div class="scene scene-cream" aria-hidden="true"></div>
+  <div class="scene scene-entry" aria-hidden="true"></div>
   <div class="scene scene-espresso" aria-hidden="true"></div>
   <div class="grain" aria-hidden="true"></div>
 
@@ -48,6 +48,29 @@
       </header>
 
       <div class="card-stage">
+      <!-- crushed tissue underlayer: turbulence-lit parchment shapes -->
+      <div class="tissue" aria-hidden="true">
+        <svg viewBox="0 0 900 1100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <filter id="crushA" x="-15%" y="-15%" width="130%" height="130%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.011 0.014" numOctaves="4" seed="42" result="n"/>
+              <feDiffuseLighting in="n" lighting-color="#FFF4DC" surfaceScale="5.2" diffuseConstant="1.08" result="l">
+                <feDistantLight azimuth="235" elevation="52"/>
+              </feDiffuseLighting>
+              <feComposite in="l" in2="SourceGraphic" operator="in"/>
+            </filter>
+            <filter id="crushB" x="-15%" y="-15%" width="130%" height="130%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.016 0.019" numOctaves="4" seed="913" result="n"/>
+              <feDiffuseLighting in="n" lighting-color="#FFF8E6" surfaceScale="4.4" diffuseConstant="1.12" result="l">
+                <feDistantLight azimuth="230" elevation="58"/>
+              </feDiffuseLighting>
+              <feComposite in="l" in2="SourceGraphic" operator="in"/>
+            </filter>
+          </defs>
+          <path filter="url(#crushA)" fill="#EBDFC4" d="M847,558L866,707L824,757L781,879L657,967L636,1077L480,1001L422,1042L287,1027L250,972L192,797L160,728L133,661L-5,579L136,454L26,315L105,181L214,161L310,190L403,40L484,28L565,120L732,95L716,265L772,327L863,387Z"/>
+          <path filter="url(#crushB)" fill="#F2E8D2" transform="rotate(7 450 550) scale(0.94) translate(28 36)" d="M850,537L820,652L763,824L721,867L592,1039L535,998L422,996L298,940L147,928L180,740L133,695L25,547L30,406L80,304L192,187L304,171L428,165L546,25L567,181L693,251L765,339L799,408Z"/>
+        </svg>
+      </div>
       <div class="slip" aria-hidden="true"><span class="slip-text">01 / entry &mdash; private room</span></div>
       <form class="card" id="signupForm" novalidate>
         <p class="card-label" aria-hidden="true">founder era entry</p>
