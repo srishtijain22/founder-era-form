@@ -48,27 +48,48 @@
       </header>
 
       <div class="card-stage">
-      <!-- crushed tissue underlayer: turbulence-lit parchment shapes -->
-      <div class="tissue" aria-hidden="true">
+      <!-- sheer organza underlayer: soft gathered folds with a glossy sheen -->
+      <div class="organza" aria-hidden="true">
         <svg viewBox="0 0 900 1100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <filter id="crushA" x="-15%" y="-15%" width="130%" height="130%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.011 0.014" numOctaves="4" seed="42" result="n"/>
-              <feDiffuseLighting in="n" lighting-color="#FFF4DC" surfaceScale="5.2" diffuseConstant="1.08" result="l">
-                <feDistantLight azimuth="235" elevation="52"/>
+            <filter id="organzaA" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="turbulence" baseFrequency="0.0038 0.0105" numOctaves="3" seed="71" result="n"/>
+              <feDiffuseLighting in="n" lighting-color="#F6EDDC" surfaceScale="14" diffuseConstant="1" result="d">
+                <feDistantLight azimuth="235" elevation="62"/>
               </feDiffuseLighting>
-              <feComposite in="l" in2="SourceGraphic" operator="in"/>
+              <feComponentTransfer in="d" result="ds">
+                <feFuncR type="linear" slope="0.55" intercept="0.44"/>
+                <feFuncG type="linear" slope="0.55" intercept="0.41"/>
+                <feFuncB type="linear" slope="0.55" intercept="0.36"/>
+              </feComponentTransfer>
+              <feSpecularLighting in="n" lighting-color="#FFFDF2" surfaceScale="14" specularConstant="1.15" specularExponent="11" result="s">
+                <feDistantLight azimuth="240" elevation="57"/>
+              </feSpecularLighting>
+              <feComposite in="s" in2="ds" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="lit"/>
+              <feGaussianBlur in="lit" stdDeviation="1.1" result="soft"/>
+              <feComposite in="soft" in2="SourceGraphic" operator="in"/>
             </filter>
-            <filter id="crushB" x="-15%" y="-15%" width="130%" height="130%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.016 0.019" numOctaves="4" seed="913" result="n"/>
-              <feDiffuseLighting in="n" lighting-color="#FFF8E6" surfaceScale="4.4" diffuseConstant="1.12" result="l">
-                <feDistantLight azimuth="230" elevation="58"/>
+            <filter id="organzaB" x="-20%" y="-20%" width="140%" height="140%">
+              <feTurbulence type="turbulence" baseFrequency="0.0046 0.0125" numOctaves="3" seed="208" result="n"/>
+              <feDiffuseLighting in="n" lighting-color="#F8F1E2" surfaceScale="13" diffuseConstant="1" result="d">
+                <feDistantLight azimuth="228" elevation="64"/>
               </feDiffuseLighting>
-              <feComposite in="l" in2="SourceGraphic" operator="in"/>
+              <feComponentTransfer in="d" result="ds">
+                <feFuncR type="linear" slope="0.52" intercept="0.45"/>
+                <feFuncG type="linear" slope="0.52" intercept="0.42"/>
+                <feFuncB type="linear" slope="0.52" intercept="0.37"/>
+              </feComponentTransfer>
+              <feSpecularLighting in="n" lighting-color="#FFFEF6" surfaceScale="13" specularConstant="1.2" specularExponent="12" result="s">
+                <feDistantLight azimuth="236" elevation="56"/>
+              </feSpecularLighting>
+              <feComposite in="s" in2="ds" operator="arithmetic" k1="0" k2="1" k3="1" k4="0" result="lit"/>
+              <feGaussianBlur in="lit" stdDeviation="1.1" result="soft"/>
+              <feComposite in="soft" in2="SourceGraphic" operator="in"/>
             </filter>
           </defs>
-          <path filter="url(#crushA)" fill="#EBDFC4" d="M847,558L866,707L824,757L781,879L657,967L636,1077L480,1001L422,1042L287,1027L250,972L192,797L160,728L133,661L-5,579L136,454L26,315L105,181L214,161L310,190L403,40L484,28L565,120L732,95L716,265L772,327L863,387Z"/>
-          <path filter="url(#crushB)" fill="#F2E8D2" transform="rotate(7 450 550) scale(0.94) translate(28 36)" d="M850,537L820,652L763,824L721,867L592,1039L535,998L422,996L298,940L147,928L180,740L133,695L25,547L30,406L80,304L192,187L304,171L428,165L546,25L567,181L693,251L765,339L799,408Z"/>
+          <path filter="url(#organzaA)" fill="#F3E9D3" opacity="0.62" d="M754,584C755,666 835,754 814,802C794,850 676,828 633,872C589,917 600,1045 554,1070C509,1095 433,1043 362,1022C290,1001 176,986 126,945C77,903 80,842 64,772C48,702 25,601 31,524C37,447 74,371 101,310C127,250 145,181 191,159C237,137 319,197 376,179C433,161 498,36 534,50C569,63 543,215 590,257C636,300 783,252 810,306C837,361 753,501 754,584Z"/>
+          <path filter="url(#organzaB)" fill="#F5EDDA" opacity="0.46" d="M901,596C902,670 902,809 860,857C819,905 701,869 649,885C597,901 588,931 549,950C510,970 455,1033 416,1003C377,972 337,830 315,768C292,706 279,684 281,630C284,576 305,482 328,443C351,404 377,444 421,396C465,348 544,157 591,154C638,152 658,339 701,382C745,426 818,381 851,416C884,452 899,523 901,596Z"/>
+          <path filter="url(#organzaB)" fill="#F1E6CD" opacity="0.56" d="M468,237C467,262 439,278 423,304C407,331 404,378 375,398C345,418 281,439 244,425C206,411 168,342 149,313C129,285 143,285 127,253C111,221 34,152 53,122C71,92 184,75 238,73C291,71 341,97 373,111C405,124 413,132 429,153C445,174 469,212 468,237Z"/>
         </svg>
       </div>
       <div class="slip" aria-hidden="true"><span class="slip-text">01 / entry &mdash; private room</span></div>
