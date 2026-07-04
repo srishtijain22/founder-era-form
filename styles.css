@@ -254,23 +254,19 @@ body.is-done .logo-fe { color: #8f9bff; }
   color: rgba(230, 219, 200, 0.72);
 }
 
-/* ——— Card stage: organza underlayer + invite slip + entry card ——— */
+/* ——— Card stage: tissue underlayer + invite slip + entry card ——— */
 .card-stage { position: relative; }
 
-/* sheer organza layer — one continuous cloth, feathered and weightless */
-.organza {
+/* crushed parchment layer — sculptural, matte, framing the card */
+.tissue {
   position: absolute;
-  inset: -5% -12% -4% -13%;
+  inset: -3% -9% -3% -10%;
   pointer-events: none;
+  filter:
+    drop-shadow(0 46px 80px rgba(0, 0, 0, 0.5))
+    drop-shadow(0 10px 26px rgba(0, 0, 0, 0.35));
 }
-.og-shadow { fill: #241A10; opacity: 0.16; filter: url(#ogsoft); }
-.og-body   { fill: url(#ogbody); filter: url(#ogflow); }
-.og-fB     { filter: url(#ogflowB); }
-.og-fC     { filter: url(#ogflowC); }
-.og-body2  { fill: url(#ogbody2); filter: url(#ogflow); }
-.og-ridge  { fill: #FFFBEC; opacity: 0.36; filter: url(#ogridge); }
-.og-ridge2 { opacity: 0.18; }
-.organza svg {
+.tissue svg {
   display: block;
   width: 100%;
   height: 100%;
@@ -731,7 +727,7 @@ input:focus {
     grid-row: 1 / span 2;
     margin-top: 110px;
   }
-  .organza { inset: -8% -21% -8% -24%; }
+  .tissue { inset: -9% -16% -8% -18%; }
   .footnote {
     grid-column: 1;
     grid-row: 2;
