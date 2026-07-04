@@ -48,27 +48,50 @@
       </header>
 
       <div class="card-stage">
-      <!-- crushed tissue underlayer: turbulence-lit parchment shapes -->
-      <div class="tissue" aria-hidden="true">
+      <!-- sheer organza underlayer: sweeping translucent bands with lit hem edges -->
+      <div class="organza" aria-hidden="true">
         <svg viewBox="0 0 900 1100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <filter id="crushA" x="-15%" y="-15%" width="130%" height="130%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.011 0.014" numOctaves="4" seed="42" result="n"/>
-              <feDiffuseLighting in="n" lighting-color="#FFF4DC" surfaceScale="5.2" diffuseConstant="1.08" result="l">
-                <feDistantLight azimuth="235" elevation="52"/>
-              </feDiffuseLighting>
-              <feComposite in="l" in2="SourceGraphic" operator="in"/>
+            <linearGradient id="oga" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#FFF9E9" stop-opacity="0.42"/>
+              <stop offset="0.35" stop-color="#F4E9D0" stop-opacity="0.14"/>
+              <stop offset="0.62" stop-color="#FFFBEE" stop-opacity="0.34"/>
+              <stop offset="0.85" stop-color="#DEC9A4" stop-opacity="0.16"/>
+              <stop offset="1" stop-color="#F2E6CC" stop-opacity="0.08"/>
+            </linearGradient>
+            <linearGradient id="ogb" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0" stop-color="#FFFAEC" stop-opacity="0.36"/>
+              <stop offset="0.4" stop-color="#EFE2C6" stop-opacity="0.12"/>
+              <stop offset="0.7" stop-color="#FFF7E2" stop-opacity="0.3"/>
+              <stop offset="1" stop-color="#D9C5A0" stop-opacity="0.1"/>
+            </linearGradient>
+            <linearGradient id="ogc" x1="0" y1="1" x2="1" y2="0">
+              <stop offset="0" stop-color="#FBF2DD" stop-opacity="0.3"/>
+              <stop offset="0.5" stop-color="#EFE3C8" stop-opacity="0.1"/>
+              <stop offset="1" stop-color="#FFFBEC" stop-opacity="0.26"/>
+            </linearGradient>
+            <filter id="ogwave" x="-12%" y="-12%" width="124%" height="124%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.0085" numOctaves="2" seed="8" result="n"/>
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="20"/>
             </filter>
-            <filter id="crushB" x="-15%" y="-15%" width="130%" height="130%">
-              <feTurbulence type="fractalNoise" baseFrequency="0.016 0.019" numOctaves="4" seed="913" result="n"/>
-              <feDiffuseLighting in="n" lighting-color="#FFF8E6" surfaceScale="4.4" diffuseConstant="1.12" result="l">
-                <feDistantLight azimuth="230" elevation="58"/>
-              </feDiffuseLighting>
-              <feComposite in="l" in2="SourceGraphic" operator="in"/>
+            <filter id="ogwaveSoft" x="-14%" y="-14%" width="128%" height="128%">
+              <feTurbulence type="fractalNoise" baseFrequency="0.007" numOctaves="2" seed="21" result="n"/>
+              <feDisplacementMap in="SourceGraphic" in2="n" scale="26" result="d"/>
+              <feGaussianBlur in="d" stdDeviation="2.4"/>
             </filter>
           </defs>
-          <path filter="url(#crushA)" fill="#EBDFC4" d="M847,558L866,707L824,757L781,879L657,967L636,1077L480,1001L422,1042L287,1027L250,972L192,797L160,728L133,661L-5,579L136,454L26,315L105,181L214,161L310,190L403,40L484,28L565,120L732,95L716,265L772,327L863,387Z"/>
-          <path filter="url(#crushB)" fill="#F2E8D2" transform="rotate(7 450 550) scale(0.94) translate(28 36)" d="M850,537L820,652L763,824L721,867L592,1039L535,998L422,996L298,940L147,928L180,740L133,695L25,547L30,406L80,304L192,187L304,171L428,165L546,25L567,181L693,251L765,339L799,408Z"/>
+          <!-- soft sheer panels: the body of the fabric, barely there -->
+          <g filter="url(#ogwaveSoft)">
+            <path fill="#F6ECD6" opacity="0.11" d="M754,584C755,666 835,754 814,802C794,850 676,828 633,872C589,917 600,1045 554,1070C509,1095 433,1043 362,1022C290,1001 176,986 126,945C77,903 80,842 64,772C48,702 25,601 31,524C37,447 74,371 101,310C127,250 145,181 191,159C237,137 319,197 376,179C433,161 498,36 534,50C569,63 543,215 590,257C636,300 783,252 810,306C837,361 753,501 754,584Z"/>
+            <path fill="#F9F1DF" opacity="0.08" d="M901,596C902,670 902,809 860,857C819,905 701,869 649,885C597,901 588,931 549,950C510,970 455,1033 416,1003C377,972 337,830 315,768C292,706 279,684 281,630C284,576 305,482 328,443C351,404 377,444 421,396C465,348 544,157 591,154C638,152 658,339 701,382C745,426 818,381 851,416C884,452 899,523 901,596Z"/>
+          </g>
+          <!-- sweeping bands with lit hem edges -->
+          <g filter="url(#ogwave)" stroke-linejoin="round">
+            <path fill="url(#ogc)" stroke="#FFF9E8" stroke-opacity="0.28" stroke-width="1.6" d="M-25,256L-17,265L-8,275L2,286L13,298L25,312L37,326L49,341L61,356L74,373L86,390L98,407L109,424L119,442L128,459L135,476L141,492L145,507L148,521L148,533L147,544L145,556L141,568L135,580L129,593L121,606L113,619L105,633L96,647L86,662L77,678L69,695L61,712L54,731L49,751L46,773L45,796L48,818L54,840L61,862L70,882L80,902L91,922L104,941L117,959L130,977L144,995L158,1011L172,1027L185,1041L198,1055L210,1067L221,1078L231,1088L239,1096L246,1102L314,1058L310,1047L304,1035L297,1022L289,1008L281,993L271,977L262,960L251,943L241,926L231,909L221,892L211,875L203,858L195,842L187,827L182,814L177,802L174,792L172,784L171,776L170,768L170,757L172,746L174,733L178,719L182,704L186,689L191,673L196,656L201,639L206,622L210,604L213,585L215,566L215,547L214,528L210,509L205,490L198,471L190,452L182,433L172,414L162,394L152,375L142,355L131,336L121,318L111,299L101,282L92,265L84,250L77,236L71,223L67,213L65,204Z"/>
+            <path fill="url(#ogb)" stroke="#FFFAEA" stroke-opacity="0.4" stroke-width="1.8" d="M703,-82L700,-70L696,-55L691,-37L684,-15L678,10L670,37L663,65L657,94L651,124L647,154L643,184L642,214L643,243L647,272L655,300L665,325L678,349L692,371L706,392L721,412L735,431L748,450L760,469L771,487L779,504L785,521L788,537L788,554L788,572L785,590L782,610L777,629L770,648L763,668L755,688L746,708L737,728L727,748L717,768L707,788L696,808L687,827L676,846L664,867L651,888L637,910L623,932L609,954L596,976L583,997L571,1017L560,1036L550,1053L542,1069L536,1082L664,1158L672,1148L681,1135L692,1120L705,1102L718,1082L732,1061L746,1037L760,1013L773,988L786,963L799,937L810,911L820,885L828,861L834,838L841,815L847,792L853,768L858,744L863,720L868,695L871,671L874,646L875,621L876,597L875,572L873,548L869,522L862,497L853,473L841,450L829,428L817,407L804,386L792,366L781,346L771,327L763,308L757,290L754,274L754,259L756,243L759,224L764,203L771,180L779,156L788,132L798,107L808,83L818,59L828,36L837,15L845,-5L852,-23L857,-38Z"/>
+            <path fill="url(#oga)" stroke="#FFFBEE" stroke-opacity="0.5" stroke-width="2" d="M873,14L860,17L845,22L829,29L812,36L793,44L774,53L753,63L733,72L712,82L691,91L671,100L652,108L634,116L617,122L601,127L583,131L563,135L541,139L519,142L495,145L471,148L446,152L421,156L396,161L372,168L347,176L324,186L302,198L282,210L263,224L245,238L227,253L209,269L192,285L176,301L160,318L144,335L129,352L115,369L101,386L87,404L74,423L61,444L49,467L39,490L29,514L20,538L11,561L3,584L-4,606L-10,626L-16,644L-21,660L-26,672L-30,682L110,718L112,705L114,689L115,671L117,652L119,632L121,610L124,588L127,566L130,543L135,522L139,501L145,481L151,464L158,448L167,431L177,414L188,397L200,381L213,365L226,350L241,335L256,322L272,309L288,298L305,287L322,279L339,271L355,266L372,262L390,260L410,260L430,260L452,261L475,262L499,264L523,266L548,267L573,268L599,267L626,265L652,261L678,255L703,247L727,238L752,228L775,218L798,207L820,195L841,183L860,172L878,161L894,151L907,141L918,133L927,126Z"/>
+            <path fill="url(#ogb)" stroke="#FFFAEA" stroke-opacity="0.45" stroke-width="1.7" d="M146,180L155,177L168,172L181,166L195,160L211,152L227,145L243,138L259,131L274,124L289,119L302,114L313,111L320,110L325,109L332,109L340,111L349,115L359,120L368,126L378,134L387,141L395,150L402,158L408,166L413,174L415,181L416,185L416,189L415,194L411,201L405,210L397,219L387,228L376,237L364,246L352,254L339,262L327,268L315,273L303,277L294,279L286,280L277,279L267,278L256,275L244,272L231,268L218,264L206,259L193,254L181,250L170,245L159,241L148,238L140,236L120,324L126,325L133,327L143,329L155,332L168,336L182,339L198,342L214,345L230,347L247,348L263,349L280,347L297,344L312,339L326,333L340,325L354,316L368,306L382,296L395,285L408,274L420,262L431,250L441,238L450,226L457,214L462,200L464,186L463,171L460,157L455,143L449,130L441,116L432,103L422,90L411,78L399,66L386,55L372,46L357,38L340,32L322,29L302,29L283,32L264,36L245,42L226,48L208,55L190,63L173,71L157,79L143,86L131,92L122,97L114,100Z"/>
+          </g>
         </svg>
       </div>
       <div class="slip" aria-hidden="true"><span class="slip-text">01 / entry &mdash; private room</span></div>
