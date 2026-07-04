@@ -257,13 +257,19 @@ body.is-done .logo-fe { color: #8f9bff; }
 /* ——— Card stage: organza underlayer + invite slip + entry card ——— */
 .card-stage { position: relative; }
 
-/* sheer organza layer — sweeping translucent bands, airy and glossy */
+/* sheer organza layer — one continuous cloth, feathered and weightless */
 .organza {
   position: absolute;
   inset: -5% -12% -4% -13%;
   pointer-events: none;
-  filter: drop-shadow(0 24px 44px rgba(0, 0, 0, 0.22));
 }
+.og-shadow { fill: #241A10; opacity: 0.16; filter: url(#ogsoft); }
+.og-body   { fill: url(#ogbody); filter: url(#ogflow); }
+.og-fB     { filter: url(#ogflowB); }
+.og-fC     { filter: url(#ogflowC); }
+.og-body2  { fill: url(#ogbody2); filter: url(#ogflow); }
+.og-ridge  { fill: #FFFBEC; opacity: 0.36; filter: url(#ogridge); }
+.og-ridge2 { opacity: 0.18; }
 .organza svg {
   display: block;
   width: 100%;
