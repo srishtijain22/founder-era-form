@@ -1,0 +1,34 @@
+name: Fetch logo assets
+
+on:
+  workflow_dispatch:
+    inputs:
+      url1:
+        required: true
+        type: string
+      url2:
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: claude/founder-era-signup-form-6swcbu
+      - name: Download and commit
+        run: |
+          set -euo pipefail
+          mkdir -p assets
+          curl -sSL -o assets/logo-p1.png "${{ inputs.url1 }}"
+          curl -sSL -o assets/logo-p2.png "${{ inputs.url2 }}"
+          file assets/*.png
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets
+          git commit -m "Add exported brand logo assets"
+          git push
