@@ -25,17 +25,19 @@
 }
 
 :root {
-  --cream: #F4EEE2;
-  --cream-warm: #EFE5D2;
-  --sand: #E9DCC3;
+  /* Founder Era brand palette */
+  --cream: #F3EAD7;
+  --cream-warm: #EFE3CB;
+  --sand: #E7D8BC;
   --gold: #C99A5B;
-  --espresso: #3A2B20;
-  --espresso-deep: #2C2016;
-  --ink: #2A211A;
-  --muted: #8A7E70;
-  --cobalt: #2B3AF0;
-  --cobalt-deep: #2230E0;
-  --cobalt-soft: rgba(43, 58, 240, 0.14);
+  --taupe: #CBB9A7;
+  --espresso: #3E2D1D;
+  --espresso-deep: #2E2113;
+  --ink: #3E2D1D;
+  --muted: #8F7E69;
+  --cobalt: #304EE9;
+  --cobalt-deep: #2440D6;
+  --cobalt-soft: rgba(48, 78, 233, 0.14);
   --serif: 'Fraunces', 'Iowan Old Style', Georgia, serif;
   --sans: 'Inter', -apple-system, 'Segoe UI', sans-serif;
   --radius: 14px;
@@ -68,7 +70,7 @@ body {
     radial-gradient(120% 90% at 85% -10%, rgba(201, 154, 91, 0.30), transparent 55%),
     radial-gradient(90% 70% at -15% 40%, rgba(233, 220, 195, 0.85), transparent 60%),
     radial-gradient(100% 80% at 70% 110%, rgba(201, 154, 91, 0.20), transparent 58%),
-    linear-gradient(160deg, #F7F2E7 0%, var(--cream) 42%, #EFE4CD 100%);
+    linear-gradient(160deg, #F8F0DE 0%, var(--cream) 42%, #EBDDC1 100%);
 }
 .scene-entry::after {
   content: '';
@@ -85,15 +87,15 @@ body {
   background:
     radial-gradient(110% 80% at 80% -15%, rgba(201, 154, 91, 0.28), transparent 55%),
     radial-gradient(80% 60% at 10% 105%, rgba(201, 154, 91, 0.14), transparent 60%),
-    linear-gradient(155deg, #463527 0%, var(--espresso) 45%, var(--espresso-deep) 100%);
+    linear-gradient(155deg, #4A3623 0%, var(--espresso) 45%, var(--espresso-deep) 100%);
 }
 .scene-espresso::after {
   content: '';
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(244, 238, 226, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(244, 238, 226, 0.05) 1px, transparent 1px);
+    linear-gradient(rgba(243, 234, 215, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(243, 234, 215, 0.05) 1px, transparent 1px);
   background-size: 88px 88px;
 }
 body.is-done .scene-entry { opacity: 0; }
@@ -118,7 +120,7 @@ body.is-done .scene-espresso { opacity: 1; }
   z-index: 10;
   width: 46px;
   height: 46px;
-  border: 1.5px solid var(--cobalt);
+  border: 1.5px solid var(--espresso);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -127,7 +129,7 @@ body.is-done .scene-espresso { opacity: 1; }
   /* enamel-seal finish: warm off-white, raised near the ring, dished center */
   background:
     radial-gradient(120% 120% at 32% 24%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 50%),
-    linear-gradient(170deg, #FBF6EA 0%, #EDE2CC 100%);
+    linear-gradient(170deg, #F9F3E3 0%, #EAD9BE 100%);
   box-shadow:
     0 12px 24px -12px rgba(93, 69, 44, 0.5),
     0 3px 7px -3px rgba(93, 69, 44, 0.25),
@@ -136,6 +138,15 @@ body.is-done .scene-espresso { opacity: 1; }
     inset 0 -8px 12px -8px rgba(139, 117, 90, 0.5),
     inset 0 7px 10px -7px rgba(255, 255, 255, 0.9);
   transition: border-color 1.1s ease, background 1.1s ease, box-shadow 1.1s ease;
+}
+/* inner ring — the double-line seal detail */
+.logo::before {
+  content: '';
+  position: absolute;
+  inset: 3.5px;
+  border: 1px solid rgba(62, 45, 29, 0.5);
+  border-radius: 50%;
+  pointer-events: none;
 }
 /* small specular point — pressed, glossy material */
 .logo::after {
@@ -153,23 +164,47 @@ body.is-done .scene-espresso { opacity: 1; }
 body.is-done .logo::after { opacity: 0.35; }
 .logo-fe {
   font-family: var(--serif);
-  font-style: italic;
   font-weight: 500;
   font-size: 19px;
-  color: var(--cobalt);
-  transform: translateY(-1px);
+  line-height: 1;
+}
+/* registration ticks either side of the seal */
+.logo-fe::before,
+.logo-fe::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 9px;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: var(--espresso);
+  transition: background 1.1s ease;
+}
+.logo-fe::before { left: -6px; }
+.logo-fe::after { right: -6px; }
+/* two-tone monogram: roman F in brown, italic e in blue */
+.fe-f,
+.fe-e {
+  position: relative;
+  top: -1px;
   transition: color 1.1s ease;
 }
+.fe-f { font-style: normal; color: var(--espresso); }
+.fe-e { font-style: italic; color: var(--cobalt); }
 body.is-done .logo {
-  border-color: #8f9bff;
+  border-color: rgba(243, 234, 215, 0.7);
   background:
     radial-gradient(130% 130% at 30% 20%, rgba(255, 250, 238, 0.16), rgba(255, 255, 255, 0) 52%),
-    linear-gradient(170deg, #4A3928 0%, #33251A 100%);
+    linear-gradient(170deg, #4E3A25 0%, #362817 100%);
   box-shadow:
     0 10px 22px -12px rgba(0, 0, 0, 0.5),
     inset 0 1px 0 rgba(255, 250, 238, 0.18);
 }
-body.is-done .logo-fe { color: #8f9bff; }
+body.is-done .logo::before { border-color: rgba(243, 234, 215, 0.35); }
+body.is-done .logo-fe::before,
+body.is-done .logo-fe::after { background: rgba(243, 234, 215, 0.7); }
+body.is-done .fe-f { color: #F3EAD7; }
+body.is-done .fe-e { color: #93A0FF; }
 
 /* ——— Layout ———————————————————————————————— */
 .page {
@@ -205,12 +240,21 @@ body.is-done .logo-fe { color: #8f9bff; }
 }
 
 .wordmark {
+  display: inline-block; /* shrinkwrap so "era" can align to Founder's right edge */
   font-family: var(--serif);
   font-size: clamp(58px, 14.5vw, 96px);
   line-height: 0.98;
   letter-spacing: -0.015em;
   font-weight: 500;
   font-variation-settings: 'opsz' 144;
+}
+.wm-founder { display: block; }
+/* stacked lockup: era drops below, right-shifted, tucked into Founder's baseline */
+.wm-era {
+  display: block;
+  text-align: right;
+  margin-top: -0.36em;
+  margin-right: -0.1em;
 }
 .wm-founder,
 .wm-era {
@@ -234,7 +278,7 @@ body.is-done .logo-fe { color: #8f9bff; }
   font-weight: 500;
   background-image: linear-gradient(105deg,
     var(--cobalt) 0%, var(--cobalt) 38%,
-    #6f7cff 48%, #96a0ff 50%, #6f7cff 52%,
+    #7288FF 48%, #9FB0FF 50%, #7288FF 52%,
     var(--cobalt) 62%, var(--cobalt) 100%);
   animation: wm-sheen 2.9s cubic-bezier(0.33, 0, 0.2, 1) 0.75s forwards;
 }
@@ -266,7 +310,7 @@ body.is-done .logo-fe { color: #8f9bff; }
   position: absolute;
   inset: 0;
   transform: translate(14px, -16px);
-  background: linear-gradient(180deg, #FFFDF6 0%, #F5EEDE 100%);
+  background: linear-gradient(180deg, #FCF8EC 0%, #F2E9D4 100%);
   border: 1px solid rgba(139, 117, 90, 0.3);
   border-radius: 20px;
   box-shadow:
@@ -307,7 +351,7 @@ body.is-done .logo-fe { color: #8f9bff; }
 .card {
   position: relative;
   /* lit coated surface: lighter where light lands, deeper toward the base */
-  background: linear-gradient(180deg, #FEFAF1 0%, #F8F0E1 52%, #F1E6D1 100%);
+  background: linear-gradient(180deg, #FCF7EA 0%, #F6ECD8 52%, #EFE2C8 100%);
   border: 1px solid rgba(139, 117, 90, 0.28);
   border-radius: 24px;
   padding: clamp(28px, 6vw, 44px);
@@ -352,7 +396,7 @@ input[type="tel"] {
   font-family: var(--sans);
   font-size: 16px;
   color: var(--ink);
-  background: linear-gradient(180deg, #FFFDF7 0%, #FAF4E7 100%);
+  background: linear-gradient(180deg, #FDF9EE 0%, #F8F0DE 100%);
   border: 1px solid rgba(139, 117, 90, 0.34);
   border-radius: var(--radius);
   padding: 15px 17px;
@@ -394,7 +438,7 @@ input:focus {
   right: 0;
   z-index: 30;
   list-style: none;
-  background: linear-gradient(180deg, #FFFDF7, #F8F1E2);
+  background: linear-gradient(180deg, #FDF9EE, #F5EBD6);
   border: 1px solid rgba(139, 117, 90, 0.3);
   border-radius: var(--radius);
   box-shadow: 0 22px 44px -18px rgba(58, 43, 32, 0.35), inset 0 1.5px 0 rgba(255,255,255,0.8);
@@ -427,7 +471,7 @@ input:focus {
   align-items: flex-start;
   gap: 12px;
   padding: 14px 16px;
-  background: linear-gradient(180deg, #FFFDF7 0%, #F9F2E4 100%);
+  background: linear-gradient(180deg, #FDF9EE 0%, #F6EDD9 100%);
   border: 1px solid rgba(139, 117, 90, 0.32);
   border-radius: var(--radius);
   cursor: pointer;
@@ -457,8 +501,8 @@ input:focus {
 }
 /* selected: polished cobalt — lit top edge, gentle depth at the base */
 .pill:has(input:checked) {
-  background: linear-gradient(180deg, #4B59FF 0%, var(--cobalt) 52%, #2130D8 100%);
-  border-color: #1F2CC9;
+  background: linear-gradient(180deg, #5A73FF 0%, var(--cobalt) 52%, #1F38C4 100%);
+  border-color: #1C31B4;
   box-shadow:
     inset 0 1.5px 0 rgba(255, 255, 255, 0.42),
     inset 0 -10px 18px -12px rgba(10, 16, 92, 0.5),
@@ -497,8 +541,8 @@ input:focus {
   font-weight: 600;
   letter-spacing: 0.01em;
   color: #FDFCF8;
-  background: linear-gradient(180deg, #4B59FF 0%, var(--cobalt-deep) 58%, #1E2BCE 100%);
-  border: 1px solid #1F2CC9;
+  background: linear-gradient(180deg, #5A73FF 0%, var(--cobalt-deep) 58%, #1D35BE 100%);
+  border: 1px solid #1C31B4;
   border-radius: var(--radius);
   padding: 17px 20px;
   cursor: pointer;
@@ -574,7 +618,7 @@ input:focus {
 }
 
 /* ——— Done / waitlist state ————————————————— */
-.state-done { color: #F4EEE2; }
+.state-done { color: var(--cream); }
 .done-inner {
   max-width: 620px;
   margin-top: clamp(8px, 6vw, 40px);
@@ -633,7 +677,7 @@ input:focus {
   text-wrap: pretty;
   font-size: 16px;
   line-height: 1.7;
-  color: rgba(244, 238, 226, 0.88);
+  color: rgba(243, 234, 215, 0.88);
   margin-bottom: 18px;
   max-width: 48ch;
 }
@@ -643,7 +687,7 @@ input:focus {
   background: linear-gradient(90deg, rgba(201, 154, 91, 0.7), transparent);
   margin: 26px 0;
 }
-.done-share { color: rgba(244, 238, 226, 0.75); margin-bottom: 6px; }
+.done-share { color: rgba(243, 234, 215, 0.75); margin-bottom: 6px; }
 /* polished lacquered action, not a hyperlink */
 .share-link {
   position: relative;
@@ -654,8 +698,8 @@ input:focus {
   font-weight: 600;
   letter-spacing: 0.01em;
   color: #FDFCF8;
-  background: linear-gradient(180deg, #4B59FF 0%, var(--cobalt-deep) 58%, #1E2BCE 100%);
-  border: 1px solid #1F2CC9;
+  background: linear-gradient(180deg, #5A73FF 0%, var(--cobalt-deep) 58%, #1D35BE 100%);
+  border: 1px solid #1C31B4;
   border-radius: 999px;
   padding: 12px 22px;
   cursor: pointer;
