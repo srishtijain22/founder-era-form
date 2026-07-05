@@ -38,8 +38,10 @@
   --cobalt: #304EE9;
   --cobalt-deep: #2440D6;
   --cobalt-soft: rgba(48, 78, 233, 0.14);
-  --serif: 'Fraunces', 'Iowan Old Style', Georgia, serif;
-  --sans: 'Inter', -apple-system, 'Segoe UI', sans-serif;
+  /* Brand type: Canela Display/Italic + Söhne (licensed) — Fraunces/Inter
+     ship as tuned stand-ins and yield automatically if Canela/Söhne load */
+  --serif: 'Canela', 'Canela Deck', 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --sans: 'Söhne', 'Sohne', 'Inter', -apple-system, 'Segoe UI', sans-serif;
   --radius: 14px;
 }
 
@@ -120,52 +122,19 @@ body.is-done .scene-espresso { opacity: 1; }
   z-index: 10;
   width: 46px;
   height: 46px;
-  border: 1.5px solid var(--espresso);
+  /* open seal: single thin ring on the page itself, per the brand board */
+  border: 1.5px solid #6E5B41;
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   text-decoration: none;
-  /* enamel-seal finish: warm off-white, raised near the ring, dished center */
-  background:
-    radial-gradient(120% 120% at 32% 24%, rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0) 50%),
-    linear-gradient(170deg, #F9F3E3 0%, #EAD9BE 100%);
-  box-shadow:
-    0 12px 24px -12px rgba(93, 69, 44, 0.5),
-    0 3px 7px -3px rgba(93, 69, 44, 0.25),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9),
-    inset 0 0 0 3px rgba(255, 253, 246, 0.55),
-    inset 0 -8px 12px -8px rgba(139, 117, 90, 0.5),
-    inset 0 7px 10px -7px rgba(255, 255, 255, 0.9);
-  transition: border-color 1.1s ease, background 1.1s ease, box-shadow 1.1s ease;
+  transition: border-color 1.1s ease;
 }
-/* inner ring — the double-line seal detail */
-.logo::before {
-  content: '';
-  position: absolute;
-  inset: 3.5px;
-  border: 1px solid rgba(62, 45, 29, 0.5);
-  border-radius: 50%;
-  pointer-events: none;
-}
-/* small specular point — pressed, glossy material */
-.logo::after {
-  content: '';
-  position: absolute;
-  top: 6px;
-  left: 10px;
-  width: 9px;
-  height: 6px;
-  border-radius: 50%;
-  transform: rotate(-24deg);
-  background: radial-gradient(closest-side, rgba(255, 255, 255, 1), rgba(255, 255, 255, 0));
-  pointer-events: none;
-}
-body.is-done .logo::after { opacity: 0.35; }
 .logo-fe {
   font-family: var(--serif);
-  font-weight: 500;
-  font-size: 19px;
+  font-weight: 480;
+  font-size: 22px;
   line-height: 1;
 }
 /* registration ticks either side of the seal */
@@ -174,10 +143,10 @@ body.is-done .logo::after { opacity: 0.35; }
   content: '';
   position: absolute;
   top: 50%;
-  width: 9px;
+  width: 10px;
   height: 1.5px;
   margin-top: -0.75px;
-  background: var(--espresso);
+  background: #6E5B41;
   transition: background 1.1s ease;
 }
 .logo-fe::before { left: -6px; }
@@ -191,20 +160,11 @@ body.is-done .logo::after { opacity: 0.35; }
 }
 .fe-f { font-style: normal; color: var(--espresso); }
 .fe-e { font-style: italic; color: var(--cobalt); }
-body.is-done .logo {
-  border-color: rgba(243, 234, 215, 0.7);
-  background:
-    radial-gradient(130% 130% at 30% 20%, rgba(255, 250, 238, 0.16), rgba(255, 255, 255, 0) 52%),
-    linear-gradient(170deg, #4E3A25 0%, #362817 100%);
-  box-shadow:
-    0 10px 22px -12px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 250, 238, 0.18);
-}
-body.is-done .logo::before { border-color: rgba(243, 234, 215, 0.35); }
+body.is-done .logo { border-color: rgba(203, 185, 167, 0.8); }
 body.is-done .logo-fe::before,
-body.is-done .logo-fe::after { background: rgba(243, 234, 215, 0.7); }
+body.is-done .logo-fe::after { background: rgba(203, 185, 167, 0.8); }
 body.is-done .fe-f { color: #F3EAD7; }
-body.is-done .fe-e { color: #93A0FF; }
+body.is-done .fe-e { color: #5A73FF; }
 
 /* ——— Layout ———————————————————————————————— */
 .page {
@@ -229,32 +189,36 @@ body.is-done .fe-e { color: #93A0FF; }
   pointer-events: none;
 }
 
-.hero-kicker {
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.42em;
-  text-transform: uppercase;
-  color: var(--cobalt);
-  margin-bottom: 6px;
-  padding-left: 6px;
-}
-
 .wordmark {
-  display: inline-block; /* shrinkwrap so "era" can align to Founder's right edge */
+  position: relative;
+  display: inline-block; /* shrinkwrap so "era" can align within Founder's width */
   font-family: var(--serif);
   font-size: clamp(58px, 14.5vw, 96px);
   line-height: 0.98;
   letter-spacing: -0.015em;
-  font-weight: 500;
+  font-weight: 420;
   font-variation-settings: 'opsz' 144;
 }
+/* IN MY nests inside the headline's top zone, after the F — scales with it */
+.wm-kicker {
+  position: absolute;
+  /* offsets are in kicker-ems (kicker = 0.135 of the wordmark size) */
+  top: 0.7em;
+  left: 5.35em;
+  font-family: var(--sans);
+  font-size: 0.135em;
+  font-weight: 600;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+}
 .wm-founder { display: block; }
-/* stacked lockup: era drops below, right-shifted, tucked into Founder's baseline */
+/* era tucks below, right-shifted, riding Founder's baseline */
 .wm-era {
   display: block;
   text-align: right;
-  margin-top: -0.36em;
-  margin-right: -0.1em;
+  margin-top: -0.42em;
+  margin-right: 0.3em;
 }
 .wm-founder,
 .wm-era {
@@ -317,6 +281,7 @@ body.is-done .fe-e { color: #93A0FF; }
     0 14px 32px -20px rgba(93, 69, 44, 0.4),
     inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
+.slip-text em { font-style: normal; color: var(--cobalt); }
 .slip-text {
   position: absolute;
   top: 4px;
@@ -629,7 +594,7 @@ input:focus {
   font-size: clamp(52px, 13vw, 104px);
   line-height: 1.02;
   letter-spacing: -0.01em;
-  font-weight: 500;
+  font-weight: 420;
   font-variation-settings: 'opsz' 144;
   color: #F6F0E3;
   margin-bottom: clamp(28px, 5vw, 40px);

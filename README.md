@@ -11,7 +11,7 @@ A single-page, sunlit signup form for the Founder Era community. Static HTML/CSS
 | `app.js` | Form logic, city autocomplete, validation, Sheet POST — **paste your endpoint URL here** |
 | `cities.js` | Bundled world-cities list (~4,850 cities, India-first ordering) |
 | `apps-script.gs` | The Google Apps Script backend — paste into script.google.com |
-| `fonts/` | Self-hosted Fraunces + Inter (latin subsets) |
+| `fonts/` | Self-hosted Fraunces + Inter (latin subsets) — stand-ins for the brand fonts (see below) |
 | `og.png` / `favicon.svg` | Social preview image + tab icon |
 
 ## Connect the Google Sheet (one-time, ~5 minutes)
@@ -45,6 +45,10 @@ Any static host works — the whole site is this folder.
 - **Vercel:** [vercel.com/new](https://vercel.com/new) → import this GitHub repo → framework preset "Other" → Deploy.
 - **Netlify:** [app.netlify.com/start](https://app.netlify.com/start) → import this repo → no build command, publish directory `/` → Deploy.
 - **GitHub Pages:** repo Settings → Pages → deploy from branch.
+
+## Brand fonts (Canela + Söhne)
+
+The brand type system is **Canela Display / Canela Italic** (Commercial Type) and **Söhne** (Klim). Both are licensed fonts, so this repo ships free stand-ins: Fraunces (for Canela) and Inter (for Söhne). The CSS font stacks list the real fonts first — if you buy web licenses, drop the `Canela`/`Söhne` woff2 files in `fonts/`, add matching `@font-face` rules at the top of `styles.css`, and the whole site upgrades automatically with no other changes.
 
 ## Regenerating the city list
 
