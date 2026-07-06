@@ -113,7 +113,18 @@
         <div class="field">
           <label for="whatsapp">WhatsApp number</label>
           <div class="phone-group">
-            <select id="dialCode" name="dialCode" aria-label="Country dialing code"></select>
+            <div class="dial" id="dialWrap">
+              <button type="button" class="dial-btn" id="dialBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="Country dialing code">
+                <span class="dial-flag" id="dialFlag"></span>
+                <span class="dial-code" id="dialLabel">+91</span>
+                <span class="dial-chev" aria-hidden="true"></span>
+              </button>
+              <div class="dial-pop" id="dialPop" hidden>
+                <input type="text" id="dialSearch" placeholder="Search country or code&hellip;" autocomplete="off" aria-controls="dialList" aria-autocomplete="list">
+                <ul class="dial-list" id="dialList" role="listbox" aria-label="Country dialing code"></ul>
+              </div>
+              <input type="hidden" id="dialCode" name="dialCode" value="+91">
+            </div>
             <input type="tel" id="whatsapp" name="whatsapp" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210" required>
           </div>
           <p class="field-error" data-error-for="whatsapp"></p>

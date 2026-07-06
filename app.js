@@ -81,17 +81,95 @@ function flagEmoji(cc) {
   return cc.replace(/./g, c => String.fromCodePoint(127397 + c.charCodeAt(0)));
 }
 
-(function initDialCodes() {
-  const sel = $('dialCode');
-  if (!sel) return;
-  for (const [cc, dial, name] of DIAL_CODES) {
-    const opt = document.createElement('option');
-    opt.value = '+' + dial;
-    opt.textContent = `${flagEmoji(cc)}  +${dial}`;
-    opt.title = name;
-    sel.appendChild(opt);
+(function initDialPicker() {
+  const wrap = $('dialWrap'), btn = $('dialBtn'), pop = $('dialPop');
+  const search = $('dialSearch'), list = $('dialList');
+  const hidden = $('dialCode'), flagEl = $('dialFlag'), labelEl = $('dialLabel');
+  if (!wrap) return;
+
+  let current = DIAL_CODES.find(c => '+' + c[1] === hidden.value) || DIAL_CODES[0];
+  let active = -1;
+
+  function paintButton() {
+    flagEl.textContent = flagEmoji(current[0]);
+    labelEl.textContent = '+' + current[1];
+    hidden.value = '+' + current[1];
   }
-  sel.value = '+91'; // India default
+
+  function render(q) {
+    const nq = q.trim().toLowerCase().replace(/^\+/, '');
+    const rows = DIAL_CODES.filter(([cc, dial, name]) =>
+      !nq || name.toLowerCase().includes(nq) || dial.startsWith(nq) || cc.toLowerCase() === nq);
+    list.innerHTML = '';
+    active = -1;
+    if (!rows.length) {
+      const li = document.createElement('li');
+      li.className = 'dial-empty';
+      li.textContent = 'No match';
+      list.appendChild(li);
+      return;
+    }
+    rows.forEach(([cc, dial, name], i) => {
+      const li = document.createElement('li');
+      li.setAttribute('role', 'option');
+      li.dataset.dial = dial;
+      li.dataset.cc = cc;
+      if (cc === current[0] && dial === current[1]) li.classList.add('dl-current');
+      li.innerHTML =
+        `<span class="dl-flag">${flagEmoji(cc)}</span>` +
+        `<span class="dl-name"></span><span class="dl-code">+${dial}</span>`;
+      li.querySelector('.dl-name').textContent = name;
+      li.addEventListener('mousedown', (e) => { e.preventDefault(); choose(cc, dial); });
+      list.appendChild(li);
+    });
+  }
+
+  function open() {
+    render('');
+    pop.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+    search.value = '';
+    search.focus();
+  }
+  function close() {
+    pop.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+    active = -1;
+  }
+  function choose(cc, dial) {
+    current = [cc, dial, ''];
+    paintButton();
+    close();
+    btn.focus();
+  }
+
+  btn.addEventListener('click', () => (pop.hidden ? open() : close()));
+  search.addEventListener('input', () => render(search.value));
+  search.addEventListener('keydown', (e) => {
+    const items = [...list.querySelectorAll('li[role="option"]')];
+    if (!items.length) return;
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      if (active >= 0) items[active].removeAttribute('aria-selected');
+      active = e.key === 'ArrowDown'
+        ? (active + 1) % items.length
+        : (active - 1 + items.length) % items.length;
+      items[active].setAttribute('aria-selected', 'true');
+      items[active].scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      const pick = active >= 0 ? items[active] : items[0];
+      choose(pick.dataset.cc, pick.dataset.dial);
+    } else if (e.key === 'Escape') {
+      close();
+      btn.focus();
+    }
+  });
+  document.addEventListener('click', (e) => {
+    if (!wrap.contains(e.target)) close();
+  });
+
+  paintButton();
 })();
 
 /* ——— city autocomplete ————————————————————————— */
