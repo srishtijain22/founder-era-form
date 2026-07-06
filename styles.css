@@ -320,6 +320,48 @@ input:focus {
   border-color: rgba(176, 108, 57, 0.75);
 }
 
+/* ——— Phone: country code + number ————————————— */
+.phone-group { display: flex; gap: 10px; }
+.phone-group input { flex: 1; min-width: 0; }
+#dialCode {
+  flex: none;
+  width: 108px;
+  font-family: var(--sans);
+  font-size: 15px;
+  color: var(--ink);
+  background:
+    linear-gradient(180deg, #FEFCF6 0%, #F7EFDF 100%);
+  border: 1px solid rgba(139, 117, 90, 0.34);
+  border-radius: var(--radius);
+  padding: 15px 30px 15px 15px;
+  outline: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  /* warm chevron */
+  background-image:
+    linear-gradient(45deg, transparent 50%, #8F7E69 50%),
+    linear-gradient(135deg, #8F7E69 50%, transparent 50%),
+    linear-gradient(180deg, #FEFCF6 0%, #F7EFDF 100%);
+  background-position:
+    calc(100% - 16px) center,
+    calc(100% - 11px) center,
+    0 0;
+  background-size: 5px 5px, 5px 5px, 100% 100%;
+  background-repeat: no-repeat;
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -9px 16px -12px rgba(139, 117, 90, 0.24),
+    0 1px 2px rgba(93, 69, 44, 0.1);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+#dialCode:focus {
+  border-color: var(--cobalt);
+  box-shadow:
+    inset 0 1.5px 0 rgba(255, 255, 255, 0.9),
+    0 0 0 3.5px var(--cobalt-soft);
+}
+
 .field-error {
   display: none;
   font-size: 13px;

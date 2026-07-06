@@ -112,7 +112,10 @@
 
         <div class="field">
           <label for="whatsapp">WhatsApp number</label>
-          <input type="tel" id="whatsapp" name="whatsapp" inputmode="tel" autocomplete="tel" placeholder="+91 98&hellip;" required>
+          <div class="phone-group">
+            <select id="dialCode" name="dialCode" aria-label="Country dialing code"></select>
+            <input type="tel" id="whatsapp" name="whatsapp" inputmode="tel" autocomplete="tel-national" placeholder="98765 43210" required>
+          </div>
           <p class="field-error" data-error-for="whatsapp"></p>
         </div>
 

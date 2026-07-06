@@ -37,6 +37,63 @@ function fieldOf(input) {
   return input.closest('.field');
 }
 
+/* ——— country dial codes ————————————————————————— */
+// India first, then a few common ones, then the rest alphabetical.
+const DIAL_CODES = [
+  ['IN', '91', 'India'], ['US', '1', 'United States'], ['GB', '44', 'United Kingdom'],
+  ['AE', '971', 'UAE'], ['SG', '65', 'Singapore'], ['CA', '1', 'Canada'],
+  ['AU', '61', 'Australia'],
+  ['AF', '93', 'Afghanistan'], ['AL', '355', 'Albania'], ['DZ', '213', 'Algeria'],
+  ['AR', '54', 'Argentina'], ['AM', '374', 'Armenia'], ['AT', '43', 'Austria'],
+  ['AZ', '994', 'Azerbaijan'], ['BH', '973', 'Bahrain'], ['BD', '880', 'Bangladesh'],
+  ['BE', '32', 'Belgium'], ['BT', '975', 'Bhutan'], ['BO', '591', 'Bolivia'],
+  ['BR', '55', 'Brazil'], ['BG', '359', 'Bulgaria'], ['KH', '855', 'Cambodia'],
+  ['CL', '56', 'Chile'], ['CN', '86', 'China'], ['CO', '57', 'Colombia'],
+  ['CR', '506', 'Costa Rica'], ['HR', '385', 'Croatia'], ['CY', '357', 'Cyprus'],
+  ['CZ', '420', 'Czechia'], ['DK', '45', 'Denmark'], ['EG', '20', 'Egypt'],
+  ['EE', '372', 'Estonia'], ['ET', '251', 'Ethiopia'], ['FI', '358', 'Finland'],
+  ['FR', '33', 'France'], ['GE', '995', 'Georgia'], ['DE', '49', 'Germany'],
+  ['GH', '233', 'Ghana'], ['GR', '30', 'Greece'], ['HK', '852', 'Hong Kong'],
+  ['HU', '36', 'Hungary'], ['IS', '354', 'Iceland'], ['ID', '62', 'Indonesia'],
+  ['IR', '98', 'Iran'], ['IQ', '964', 'Iraq'], ['IE', '353', 'Ireland'],
+  ['IL', '972', 'Israel'], ['IT', '39', 'Italy'], ['JM', '1', 'Jamaica'],
+  ['JP', '81', 'Japan'], ['JO', '962', 'Jordan'], ['KZ', '7', 'Kazakhstan'],
+  ['KE', '254', 'Kenya'], ['KW', '965', 'Kuwait'], ['LV', '371', 'Latvia'],
+  ['LB', '961', 'Lebanon'], ['LT', '370', 'Lithuania'], ['LU', '352', 'Luxembourg'],
+  ['MY', '60', 'Malaysia'], ['MV', '960', 'Maldives'], ['MT', '356', 'Malta'],
+  ['MX', '52', 'Mexico'], ['MD', '373', 'Moldova'], ['MC', '377', 'Monaco'],
+  ['MA', '212', 'Morocco'], ['MM', '95', 'Myanmar'], ['NP', '977', 'Nepal'],
+  ['NL', '31', 'Netherlands'], ['NZ', '64', 'New Zealand'], ['NG', '234', 'Nigeria'],
+  ['NO', '47', 'Norway'], ['OM', '968', 'Oman'], ['PK', '92', 'Pakistan'],
+  ['PS', '970', 'Palestine'], ['PA', '507', 'Panama'], ['PE', '51', 'Peru'],
+  ['PH', '63', 'Philippines'], ['PL', '48', 'Poland'], ['PT', '351', 'Portugal'],
+  ['QA', '974', 'Qatar'], ['RO', '40', 'Romania'], ['RU', '7', 'Russia'],
+  ['RW', '250', 'Rwanda'], ['SA', '966', 'Saudi Arabia'], ['RS', '381', 'Serbia'],
+  ['ZA', '27', 'South Africa'], ['KR', '82', 'South Korea'], ['ES', '34', 'Spain'],
+  ['LK', '94', 'Sri Lanka'], ['SE', '46', 'Sweden'], ['CH', '41', 'Switzerland'],
+  ['TW', '886', 'Taiwan'], ['TZ', '255', 'Tanzania'], ['TH', '66', 'Thailand'],
+  ['TR', '90', 'Turkey'], ['UG', '256', 'Uganda'], ['UA', '380', 'Ukraine'],
+  ['UY', '598', 'Uruguay'], ['UZ', '998', 'Uzbekistan'], ['VN', '84', 'Vietnam'],
+  ['YE', '967', 'Yemen'], ['ZM', '260', 'Zambia'], ['ZW', '263', 'Zimbabwe'],
+];
+
+function flagEmoji(cc) {
+  return cc.replace(/./g, c => String.fromCodePoint(127397 + c.charCodeAt(0)));
+}
+
+(function initDialCodes() {
+  const sel = $('dialCode');
+  if (!sel) return;
+  for (const [cc, dial, name] of DIAL_CODES) {
+    const opt = document.createElement('option');
+    opt.value = '+' + dial;
+    opt.textContent = `${flagEmoji(cc)}  +${dial}`;
+    opt.title = name;
+    sel.appendChild(opt);
+  }
+  sel.value = '+91'; // India default
+})();
+
 /* ——— city autocomplete ————————————————————————— */
 
 const cityInput = $('city');
@@ -189,8 +246,8 @@ const validators = {
   whatsapp(v) {
     const val = v.replace(/[\s\-().]/g, '');
     if (!val) return 'this is where your invite lands — don’t skip it.';
-    if (!/^\+?\d{8,15}$/.test(val)) {
-      return 'that number looks off — include your country code, like +91.';
+    if (!/^\d{6,14}$/.test(val)) {
+      return 'that number looks off — just the digits, no country code.';
     }
     return '';
   },
@@ -284,7 +341,7 @@ form.addEventListener('submit', async (e) => {
     journey: form.querySelector('input[name="journey"]:checked').value,
     linkedin: normalizeLinkedIn(form.elements.linkedin.value),
     email: form.elements.email.value.trim().toLowerCase(),
-    whatsapp: form.elements.whatsapp.value.trim(),
+    whatsapp: form.elements.dialCode.value + ' ' + form.elements.whatsapp.value.replace(/[\s\-().]/g, ''),
   };
 
   submitting = true;
