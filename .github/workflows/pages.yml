@@ -1,8 +1,9 @@
 name: Deploy to GitHub Pages
 
 # Publishes the site by syncing this branch's content to the gh-pages
-# branch, which GitHub Pages serves at:
-#   https://srishtijain22.github.io/founder-era-form/
+# branch. The root CNAME file points GitHub Pages at the custom domain:
+#   https://founderera.club/
+# (falls back to https://srishtijain22.github.io/founder-era-form/)
 
 on:
   push:
