@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="32" fill="#F3EAD7"/>
-  <circle cx="32" cy="32" r="26" fill="none" stroke="#6E5B41" stroke-width="2"/>
-  <line x1="1" y1="32" x2="9" y2="32" stroke="#6E5B41" stroke-width="2"/>
-  <line x1="55" y1="32" x2="63" y2="32" stroke="#6E5B41" stroke-width="2"/>
-  <text x="21" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="30" fill="#3E2D1D">F</text>
-  <text x="39" y="43" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="30" fill="#304EE9">e</text>
-</svg>
