@@ -36,6 +36,8 @@ Until the endpoint is set, the form runs in **preview mode**: the confirmation s
 
 **Duplicates:** if the same email submits twice, the script updates the existing row (latest answers win) and bumps its "Submissions" count instead of adding a new row.
 
+**WhatsApp `#ERROR!` fix:** phone numbers begin with `+`, which Google Sheets reads as the start of a formula. The current script forces the WhatsApp column to plain-text format so the `+countrycode` is stored literally. If you deployed an older script and see `#ERROR!` in that column, paste the latest `apps-script.gs`, then in the editor pick the `healWhatsApp` function from the dropdown and click **Run** once — it recovers the numbers from the broken cells and rewrites the column as text. Then redeploy (**Manage deployments → ✏️ → New version**) so new submissions use the fix.
+
 **To update the script later:** edit the code, then **Deploy → Manage deployments → ✏️ → Version: New version → Deploy** (the URL stays the same).
 
 ## Deploying the page

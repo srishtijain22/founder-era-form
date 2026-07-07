@@ -8,10 +8,15 @@
  * updated in place (latest answers win), its "Submissions" count goes up,
  * and "Last updated" is refreshed — no endless duplicate rows.
  *
+ * WhatsApp numbers start with "+", which Sheets would otherwise read as a
+ * formula (→ #ERROR!). We force the WhatsApp column to plain-text format and
+ * write the value as text so the "+countrycode" is kept literally.
+ *
  * Setup steps are in README.md.
  */
 
 const SHEET_NAME = 'Signups';
+const WA_COL = 8; // WhatsApp column (H)
 
 const HEADERS = [
   'Timestamp', 'Name', 'Date of birth', 'City', 'Journey stage',
@@ -52,17 +57,21 @@ function doPost(e) {
 
     if (existingRow) {
       const count = Number(sheet.getRange(existingRow, 9).getValue()) || 1;
-      sheet.getRange(existingRow, 2, 1, 7).setValues([[
-        data.name, data.dob, data.city, data.journey, data.linkedin, email, data.whatsapp,
+      // everything except WhatsApp
+      sheet.getRange(existingRow, 2, 1, 6).setValues([[
+        data.name, data.dob, data.city, data.journey, data.linkedin, email,
       ]]);
+      writeWhatsApp(sheet, existingRow, data.whatsapp);
       sheet.getRange(existingRow, 9, 1, 2).setValues([[count + 1, now]]);
       return respond({ ok: true, duplicate: true });
     }
 
-    sheet.appendRow([
+    const row = lastRow + 1;
+    sheet.getRange(row, 1, 1, HEADERS.length).setValues([[
       now, data.name, data.dob, data.city, data.journey,
-      data.linkedin, email, data.whatsapp, 1, now,
-    ]);
+      data.linkedin, email, '', 1, now,
+    ]]);
+    writeWhatsApp(sheet, row, data.whatsapp);
     return respond({ ok: true });
 
   } catch (err) {
@@ -72,9 +81,35 @@ function doPost(e) {
   }
 }
 
+// Write a WhatsApp number as plain text so a leading "+" is not read as a formula.
+function writeWhatsApp(sheet, row, value) {
+  const cell = sheet.getRange(row, WA_COL);
+  cell.setNumberFormat('@');
+  cell.setValue(String(value));
+}
+
 // Lets you sanity-check the deployment by opening the Web App URL in a browser.
 function doGet() {
   return respond({ ok: true, service: 'founder-era' });
+}
+
+// One-time repair: run this once from the editor to fix rows that already
+// show #ERROR! in the WhatsApp column. It recovers the original text from the
+// broken formula and rewrites the whole column as plain text.
+function healWhatsApp() {
+  const sheet = getSheet();
+  const n = sheet.getLastRow();
+  if (n < 2) return;
+  const range = sheet.getRange(2, WA_COL, n - 1, 1);
+  const formulas = range.getFormulas();
+  const values = range.getValues();
+  range.setNumberFormat('@');
+  const out = formulas.map(function (f, i) {
+    var raw = f[0];
+    if (raw) return [raw.charAt(0) === '=' ? raw.substring(1) : raw];
+    return [values[i][0]];
+  });
+  range.setValues(out);
 }
 
 function getSheet() {
@@ -88,6 +123,8 @@ function getSheet() {
     sheet.setFrozenRows(1);
     sheet.getRange(1, 1, 1, HEADERS.length).setFontWeight('bold');
   }
+  // keep the WhatsApp column as plain text for all rows
+  sheet.getRange(1, WA_COL, sheet.getMaxRows(), 1).setNumberFormat('@');
   return sheet;
 }
 
